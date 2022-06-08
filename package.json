@@ -1,8 +1,8 @@
 {
   "name": "skeleton-nest",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "boilerplate-app",
+  "author": "payot.developer@gmail.com",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {

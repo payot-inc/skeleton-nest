@@ -1,27 +1,22 @@
-import { BizmService } from '@app/bizm';
-import { Controller, Get, Logger } from '@nestjs/common';
+import { Controller, Get, Version } from '@nestjs/common';
+import { readFile } from 'fs';
 import { join } from 'path';
+import { promisify } from 'util';
 
-@Controller()
+@Controller({
+  version: '1',
+})
 export class AppController {
-  private readonly logger = new Logger(AppController.name);
-
-  constructor(private readonly bizmService: BizmService) {}
-
   @Get()
-  getHello() {
-    const path = join(__dirname, 'assets', 'test.txt');
-    this.logger.log(path);
-    return this.bizmService
-      .generateMessage(path, {
-        title: '타이틀',
-        user: {
-          name: '홍길동',
-          phone: '010-0000-0000',
-          address: ['주소', '상세주소'],
-        },
-        msg: new Date(),
-      })
-      .then((text) => text.replace(/\n/g, '<br />'));
+  async metadataV1() {
+    const text = await promisify(readFile)(join(__dirname, '..', 'package.json'), 'utf-8');
+    return JSON.parse(text);
+  }
+
+  @Version('2')
+  @Get()
+  async metadataV2() {
+    const text = await promisify(readFile)(join(__dirname, '..', 'package.json'), 'utf-8');
+    return JSON.parse(text).version;
   }
 }

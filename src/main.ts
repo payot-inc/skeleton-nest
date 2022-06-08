@@ -7,7 +7,7 @@ import { utilities, WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
 import * as DailyRotateFile from 'winston-daily-rotate-file';
 import { join } from 'path';
-import { ValidationPipe } from '@nestjs/common';
+import { VersioningType } from '@nestjs/common';
 
 async function bootstrap() {
   const loggingFormatter = winston.format.combine(winston.format.timestamp(), utilities.format.nestLike('App', { prettyPrint: true }));
@@ -32,14 +32,18 @@ async function bootstrap() {
       ],
     }),
   });
-
   const config: ConfigService = app.get(ConfigService);
+
+  app.enableVersioning({
+    type: VersioningType.URI,
+    defaultVersion: '1',
+    prefix: 'v',
+  });
 
   app.enableCors();
 
   app.use(helmet());
   app.use(compress());
-  app.useGlobalPipes(new ValidationPipe());
 
   const PORT = +config.get('app.port');
   await app.listen(PORT);
