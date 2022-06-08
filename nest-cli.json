@@ -1,4 +1,22 @@
 {
   "collection": "@nestjs/schematics",
-  "sourceRoot": "src"
+  "sourceRoot": "src",
+  "compilerOptions": {
+    "assets": [
+      { "include": "assets/**/*", "watchAssets": true },
+      { "include": "config/*.yaml", "watchAssets": true }
+    ],
+    "webpack": true
+  },
+  "projects": {
+    "bizm": {
+      "type": "library",
+      "root": "libs/bizm",
+      "entryFile": "index",
+      "sourceRoot": "libs/bizm/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/bizm/tsconfig.lib.json"
+      }
+    }
+  }
 }

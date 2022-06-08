@@ -1,0 +1,7 @@
+app:
+  port: 3000
+
+bizm:
+  profile: 48d91fcf82ccb116f0392df6017819bb275a7764
+  userid: payot
+  sender: '07078076857'

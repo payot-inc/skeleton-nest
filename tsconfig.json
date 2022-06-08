@@ -16,6 +16,17 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@app/bizm": [
+        "libs/bizm/src"
+      ],
+      "@app/bizm/*": [
+        "libs/bizm/src/*"
+      ]
+    }
   }
 }

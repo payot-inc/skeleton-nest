@@ -1,10 +1,18 @@
+import { BizmModule } from '@app/bizm';
 import { Module } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AppConfigModule } from './config/config.module';
 
 @Module({
-  imports: [],
+  imports: [
+    AppConfigModule,
+    // LoggerModule,
+    BizmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => config.get('bizm'),
+    }),
+  ],
   controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
