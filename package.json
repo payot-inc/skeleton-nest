@@ -79,7 +79,7 @@
     ],
     "rootDir": ".",
     "moduleNameMapper": {
-      "^@/(.*)$": "<rootDir>/$1",
+      "^@/(.*)$": "<rootDir>/src/$1",
       "^@app/bizm(|/.*)$": "<rootDir>/libs/bizm/src/$1"
     },
     "testRegex": ".*\\.spec\\.ts$",
